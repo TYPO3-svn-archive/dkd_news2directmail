@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for module &quot;web_txdkdnews2directmailM1&quot;</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="recipient_list">Recipient List:</label>
+			<label index="recipient_list.description">Enter recipient list ID (required)</label>
+			<label index="recipient_list.details">Directmail recipient list ID</label>
+			<label index="send_time">Time interval:</label>
+			<label index="send_time.description">Enter time interval (in minute)</label>
+			<label index="send_time.details">Time interval after saving the news and sending the newsletter</label>
+			<label index="URL">Domain of internal link:</label>
+			<label index="URL.description">Enter domain (with http://)</label>
+			<label index="URL.details">This domain will be used if "Domain of internal link" in direct mail is not set. eg: http://www.example.tld</label>
+			<label index="configure_update_configuration">Update configuration</label>
+			<label index="dmail_folders">Available direct mail folders</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="recipient_list"></label>
+			<label index="recipient_list.description"></label>
+			<label index="recipient_list.details"></label>
+			<label index="send_time"></label>
+			<label index="send_time.description"></label>
+			<label index="send_time.details"></label>
+			<label index="configure_update_configuration"></label>
+			<label index="dmail_folders"></label>
+        </languageKey>
+	</data>
+</T3locallang>
