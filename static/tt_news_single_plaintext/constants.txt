@@ -1,0 +1,8 @@
+
+plugin.tx_directmail_pi1.news2directmail {
+		# cat=plugin.tx_directmail_pi1.news2directmail//10; type=int+; label= tt_news Storage: PID where the news are stored
+	newsStorage = 
+	
+		# cat=plugin.tx_directmail_pi1.news2directmail//20; type=int+; label= tt_news single: PID of the page to show the single news
+	newsDetail = 
+}
