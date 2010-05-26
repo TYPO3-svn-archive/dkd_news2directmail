@@ -52,7 +52,7 @@ class tx_dkdnews2directmail_module1 extends t3lib_SCbase {
 
 		parent::init();
 		
-		$this->modList = t3lib_BEfunc::getListOfBackendModules(array('dmail'),$this->perms_clause,$BACK_PATH);
+		$this->modList = $this->getListOfBackendModules(array('dmail'),$this->perms_clause,$BACK_PATH);
 		$temp = t3lib_BEfunc::getModTSconfig($this->id,'mod.web_modules.news2directmail');
 		$this->params = $temp['properties'];
 		$this->implodedParams = t3lib_BEfunc::implodeTSParams($this->params);
@@ -102,7 +102,7 @@ class tx_dkdnews2directmail_module1 extends t3lib_SCbase {
 				</script>
 			';
 
-			$headerSection = $this->doc->getHeader("pages",$this->pageinfo,$this->pageinfo["_thePath"])."<br />".$LANG->sL("LLL:EXT:lang/locallang_core.xml:labels.path").": ".t3lib_div::fixed_lgd_pre($this->pageinfo["_thePath"],50);
+			$headerSection = $this->doc->getHeader("pages",$this->pageinfo,$this->pageinfo["_thePath"])."<br />".$LANG->sL("LLL:EXT:lang/locallang_core.xml:labels.path").": ".t3lib_div::fixed_lgd_cs($this->pageinfo["_thePath"],50);
 
 			$this->content.=$this->doc->startPage($LANG->getLL("title"));
 			$this->content.=$this->doc->header($LANG->getLL("title"));
@@ -192,6 +192,38 @@ class tx_dkdnews2directmail_module1 extends t3lib_SCbase {
 		$theOutput.= $this->doc->section($LANG->getLL('configure_direct_mail_module'),str_replace('Update configuration', $LANG->getLL('configure_update_configuration'), t3lib_BEfunc::makeConfigForm($configArray,$this->implodedParams,'pageTS')),1,1,0, TRUE);
 		return $theOutput;
 	}
+	
+	/**
+	 * Returns "list of backend modules". Most likely this will be obsolete soon / removed. Don't use.
+	 * Usage: 0
+	 *
+	 * @param	array		Module names in array. Must be "addslashes()"ed
+	 * @param	string		Perms clause for SQL query
+	 * @param	string		Backpath
+	 * @param	string		The URL/script to jump to (used in A tag)
+	 * @return	array		Two keys, rows and list
+	 * @internal
+	 * @deprecated since TYPO3 3.6, this function will be removed in TYPO3 4.5.
+	 * @obsolete
+	 */
+	public static function getListOfBackendModules($name, $perms_clause, $backPath = '', $script = 'index.php') {
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'pages', 'doktype!=255 AND module IN (\''.implode('\',\'', $name).'\') AND'.$perms_clause.t3lib_BEfunc::deleteClause('pages'));
+		if (!$GLOBALS['TYPO3_DB']->sql_num_rows($res))	return false;
+
+		$out = '';
+		$theRows = array();
+		while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
+			$theRows[] = $row;
+			$out.='<span class="nobr"><a href="'.htmlspecialchars($script.'?id='.$row['uid']).'">'.
+					t3lib_iconWorks::getIconImage('pages', $row, $backPath, 'title="'.htmlspecialchars(t3lib_BEfunc::getRecordPath($row['uid'], $perms_clause, 20)).'" align="top"').
+					htmlspecialchars($row['title']).
+					'</a></span><br />';
+		}
+		$GLOBALS['TYPO3_DB']->sql_free_result($res);
+
+		return array('rows'=>$theRows, 'list'=>$out);
+	}
+	
 	
 }
 
