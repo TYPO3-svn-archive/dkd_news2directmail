@@ -1,2 +1,0 @@
-  # cat=basic/enable; type=boolean; label=Direct Mail Version 2.5.x or above: Check this if Direct Mail version 2.5.x or above is installed
-directmailVersion = 1

@@ -33,7 +33,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'constraints' => array(
 		'depends' => array(
 			'tt_news' => '',
-			'direct_mail' => '',
+			'direct_mail' => '2.5.x',
 		),
 		'conflicts' => array(
 		),

@@ -55,19 +55,10 @@ $GLOBALS['TYPO3_DB']->sql_select_db(TYPO3_db);
 // Application code starts here
 
 
-$_EXTCONF = unserialize($_EXTCONF);
-
-if($_EXTCONF['directmailVersion']){
-	// > 2.5.x is installed
-	require(dirname(PATH_thisScript).'/class.ext_tx_directmail_dmail.php');
-	// Make instance:
-	$SOBE = t3lib_div::makeInstance('ext_tx_directmail_dmail');
-} else {
-	// < 2.5.x is installed
-	require(dirname(PATH_thisScript).'/class.ext_mod_web_dmail.php');
-	// Make instance:
-	$SOBE = t3lib_div::makeInstance('ext_mod_web_dmail');
-}
+// > 2.5.x is installed
+require(dirname(PATH_thisScript).'/class.ext_tx_directmail_dmail.php');
+// Make instance:
+$SOBE = t3lib_div::makeInstance('ext_tx_directmail_dmail');
 
 // argv[1] => newsletter uid
 $SOBE->init($argv[1]);
