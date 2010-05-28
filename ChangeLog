@@ -1,3 +1,6 @@
+10-05-28 Ivan Kartolo <ivan.kartolo@dkd.de>
+	* default dmail uid is zero. SQL is updated
+
 10-05-26 Ivan Kartolo <ivan.kartolo@dkd.de>
 	* replaced deprecated functions
 

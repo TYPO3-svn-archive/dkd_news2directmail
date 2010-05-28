@@ -455,7 +455,7 @@ echo $errorMsg;
 			'*',
 			'tt_news',
 			'tx_dkdnews2directmail_senddmail = 1 '.
-				'AND tx_dkdnews2directmail_dmail_uid IS NULL'.
+				'AND tx_dkdnews2directmail_dmail_uid = 0'.
 				t3lib_BEfunc::BEenableFields('tt_news').
 				t3lib_BEfunc::deleteClause('tt_news'),
 			'',
