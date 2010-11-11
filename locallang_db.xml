@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'dkd_news2directmail'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tt_news.tx_dkdnews2directmail_senddmail">send as direct mail</label>
+			<label index="tt_news.tx_dkdnews2directmail_dmail_uid">dmail_uid</label>
+		</languageKey>
+	</data>
+</T3locallang>

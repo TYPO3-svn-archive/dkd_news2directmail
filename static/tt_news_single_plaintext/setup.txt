@@ -1,0 +1,82 @@
+#
+# plain text rendering of tt_news records
+#
+includeLibs.tx_directmail_container = EXT:direct_mail/res/scripts/class.tx_directmail_container.php
+tx_directmail_pi1.10.marks.CONTENT >
+tx_directmail_pi1.10.marks.CONTENT = CONTENT
+tx_directmail_pi1.10.marks.CONTENT {
+	table = tt_news
+	select {
+		pidInList = {$plugin.tx_directmail_pi1.news2directmail.newsStorage}
+		andWhere {
+			setCurrent.data = GPvar:tx_ttnews|tt_news
+			current = 1
+			intval = 1
+			wrap = uid=|
+		}
+	}
+	renderObj = COA
+	renderObj {
+		10 = TEXT
+		10 {
+			field = short
+			case = upper
+			preUserFunc = tx_directmail_container->breakLines
+			noTrimWrap (
+|
+
+----------------------------------------------------------------------------
+|
+----------------------------------------------------------------------------
+
+|
+)
+		}
+		20 = TEXT
+		20 {
+			field = bodytext
+			parseFunc.tags {
+				link = TEXT
+				link {
+					current = 1
+					append = TEXT
+					append {
+						typolink.parameter.data = parameters:allParams
+						typolink.returnLast = url
+						noTrimWrap = | ({getIndpEnv:TYPO3_SITE_URL}|) |
+						insertData = 1
+					}
+				}
+			}
+			stripHtml = 1
+			encapsLines.innerStdWrap_all.noTrimWrap (
+||
+|
+)
+		}
+		20.postUserFunc = tx_directmail_container->breakLines
+		20.postUserFunc.charWidth = 70
+		
+		30 = TEXT
+		30 {
+			typolink {
+				parameter = {$plugin.tx_directmail_pi1.news2directmail.newsDetail}
+				useCacheHash = 1
+				additionalParams.data = GPvar:tx_ttnews|tt_news
+				additionalParams.wrap = &tx_ttnews[tt_news]= |
+				returnLast = url
+			}
+			noTrimWrap (
+|
+
+more >>
+{getIndpEnv:TYPO3_SITE_URL}|
+|
+)
+			insertData = 1
+		}
+	}
+	stdWrap {
+		wrap3 = <!--DMAILER_SECTION_BOUNDARY_--> | <!--DMAILER_SECTION_BOUNDARY_END-->
+	}
+}
